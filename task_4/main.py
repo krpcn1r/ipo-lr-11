@@ -22,19 +22,19 @@ for i in countries:
 for i in capitals:
     data_capitals.append(i.find("span", class_ = "country-capital").text.strip())
 
-# Объединяем два списка в один словарь {Страна: Столица}
+# Объединяем два списка в один словарь 
 data_dict = dict(zip(data_countries, data_capitals))
 
 for i in range(len(data_countries)):
     print(f"{i + 1}. Country: {list(data_dict.keys())[i]}; Capital: {list(data_dict.values())[i]};")
 
-# Сохраняем собранные данные в файл JSON для долгосрочного хранения
-with open("C:/Users/ZaytsSte_89/Documents/Visual Studio 2022/Python/data.json", "w", encoding = "utf-8") as file:
+# Сохраняем собранные данные в файл JSON
+with open("data.json", "w", encoding = "utf-8") as file:
     json.dump(data_dict, file, ensure_ascii=False, indent=4)
     print("Данные записаны")
 
-# Читаем данные обратно из файла для последующей обработки
-with open("C:/Users/ZaytsSte_89/Documents/Visual Studio 2022/Python/data.json", "r", encoding = "utf-8") as file:
+# Читаем данные из файла для обработки
+with open("data.json", "r", encoding = "utf-8") as file:
     load_data = json.load(file)
     info = json.dumps(load_data, ensure_ascii=False)
 
@@ -43,7 +43,7 @@ with open("C:/Users/ZaytsSte_89/Documents/Visual Studio 2022/Python/data.json", 
 
     rows = ""
 
-    # Динамически формируем строки HTML-таблицы из данных словаря
+    # Формируем HTML таблицу из данных словаря
     for a,b in zip(info_keys, info_values):
         row = f"""
         <tr>
@@ -57,7 +57,7 @@ with open("C:/Users/ZaytsSte_89/Documents/Visual Studio 2022/Python/data.json", 
         """
         rows += row
     
-    # Собираем финальный HTML-документ, вставляя в него готовую строку с рядами таблицы
+    # Собираем финальный HTML документ
     html = f"""
             <html>
                 <head>
@@ -86,6 +86,6 @@ with open("C:/Users/ZaytsSte_89/Documents/Visual Studio 2022/Python/data.json", 
             </html>
             """
 
-# Записываем итоговый HTML-код в файл для просмотра в браузере
-with open("C:/Users/ZaytsSte_89/Documents/Visual Studio 2022/Python/output.html", "w", encoding="utf-8") as file:
+# Записываем готовый HTML код в файл 
+with open("output.html", "w", encoding="utf-8") as file:
     file.write(html)
